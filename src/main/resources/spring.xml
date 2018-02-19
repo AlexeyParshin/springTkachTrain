@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="
+ 		http://www.springframework.org/schema/beans
+ 		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+
+  <import resource="loggers.xml"/>
+
+  <bean id="client" class="com.epam.spring.core.beans.Client">
+    <constructor-arg index="0" value="1"/>
+    <constructor-arg index="1" value="motherfucker"/>
+    <property name="greeting" value="hello there!"/>
+  </bean>
+
+  <bean id="app" class="com.epam.spring.core.App">
+    <constructor-arg index="0" ref="client"/>
+    <constructor-arg index="1" ref="eventCacheFileLogger"/>
+    <constructor-arg>
+      <map>
+        <entry key="INFO" value-ref="eventConsoleLogger"/>
+        <entry key="ERROR" value-ref="eventCombinedLogger"/>
+      </map>
+    </constructor-arg>
+  </bean>
+
+</beans>
